@@ -11,4 +11,11 @@ export default defineNuxtConfig({
       measurementId: "G-DYB8EE96B1",
     },
   },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  css: ["~/assets/css/main.css"],
 });

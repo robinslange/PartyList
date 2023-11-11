@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { v4 as uuidv4 } from 'uuid';
 import { useFirestore } from 'vuefire';
 import { doc, getDoc, addDoc, collection } from 'firebase/firestore';
 
@@ -7,9 +8,46 @@ const db = useFirestore();
 const list = await getDoc(doc(db, 'lists', 'list1'));
 console.log(list.data());
 
-let formData = {
-    name:'',
+type ListItem = {
+    id: string,
+    title: string,
+    quantity: number
+    link: string
 }
+
+let listItems: Array<ListItem> = [
+    {
+        id: uuidv4(),
+        title: 'test',
+        quantity: 1,
+        link: '123'
+    },
+    {
+        id: uuidv4(),
+        title: 'test2',
+        quantity: 1,
+        link: '123'
+    },
+    {
+        id: uuidv4(),
+        title: 'test3',
+        quantity: 1,
+        link: '123'
+    },
+]
+
+let formData = {
+    listName: '',
+    listItemCount: 0,
+    listItems: listItems,
+}
+
+function objectKeysToArray(obj: object) {
+    return Object.keys(obj);
+}
+
+
+
 
 async function onSubmit(event: Event) {
     event?.preventDefault();
@@ -20,9 +58,16 @@ async function onSubmit(event: Event) {
 </script>
 
 <template>
-    <div>
+    <div class="flex">
         <form @submit="onSubmit">
-            <input type="text" name="name" v-model="formData.name"/>
+            <input type="text" name="name" v-model="formData.listName" />
+            <div class="inline-flex bg-red-600" v-for="item in formData.listItems" :key="item.id">
+                <span v-for="(field, index) in objectKeysToArray(item)" :key="field">
+                    <div v-if="index > 0">
+                        <input type="text" :name="field" :placeholder="field" />
+                    </div>
+                </span>
+            </div>
             <button type="submit" name="submit">Submit</button>
         </form>
     </div>

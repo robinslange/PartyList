@@ -11,14 +11,20 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@types/uuid": "^9.0.7",
+    "autoprefixer": "^10.4.16",
     "firebase": "^10.6.0",
     "nuxt": "^3.8.1",
     "nuxt-vuefire": "^0.4.1",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5",
     "vue-tsc": "^1.8.22",
     "vuefire": "^3.1.18"
   },
-  "dependencies": {}
+  "dependencies": {
+    "uuid": "^9.0.1"
+  }
 }
